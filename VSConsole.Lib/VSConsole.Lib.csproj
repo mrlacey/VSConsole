@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>VSConsole</PackageId>
+    <Version>0.1-pre</Version>
+    <Authors>Matt Lacey</Authors>
+    <Company>Matt Lacey  Ltd.</Company>
+    <Product>VSConsole</Product>
+    <Copyright>Matt Lacey Ltd. 2021</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/mrlacey/VSConsole</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mrlacey/VSConsole</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>VSSDK,VisualStudio,Console</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>Utility library for use with the VSConsole Extension for Visual Studio 2019</Description>
+  </PropertyGroup>
+
+</Project>
