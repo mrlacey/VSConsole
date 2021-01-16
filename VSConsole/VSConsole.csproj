@@ -52,6 +52,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VSConsoleAction.cs" />
+    <Compile Include="VSConsoleActionType.cs" />
     <Compile Include="VSCToolWindow.cs" />
     <Compile Include="VSCToolWindowCommand.cs" />
     <Compile Include="VSCToolWindowControl.xaml.cs">
