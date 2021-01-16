@@ -1,7 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using EnvDTE;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.Shell;
 using System.Collections.Generic;
@@ -11,13 +9,9 @@ using Microsoft.VisualStudio.TextManager.Interop;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text;
 using System.Linq;
-using System.Threading;
 
 namespace VSConsole
 {
-    /// <summary>
-    /// Interaction logic for VSCToolWindowControl.
-    /// </summary>
     public partial class VSCToolWindowControl : UserControl
     {
         private ITextBuffer debugTextBuffer;
@@ -28,13 +22,21 @@ namespace VSConsole
             ThreadHelper.ThrowIfNotOnUIThread();
             this.InitializeComponent();
 
+            Messenger.UpdateFormatting += () => { this.SetColorsBasedOnSettings(); };
+            this.SetColorsBasedOnSettings();
+
+            this.WaitForDebugOutputTextBuffer();
+        }
+
+        private void SetColorsBasedOnSettings()
+        {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
             var options = VSCToolWindowPackage.Instance?.Options ?? new OptionPageGrid();
             this.OutputWindow.Foreground = ColorHelper.GetColorBrush(options.ForegroundColor);
             this.OutputWindow.Background = ColorHelper.GetColorBrush(options.BackgroundColor);
             this.OutputWindow.FontFamily = new System.Windows.Media.FontFamily(options.FontFamily);
             this.OutputWindow.FontSize = options.FontSize;
-
-            this.WaitForDebugOutputTextBuffer();
         }
 
         private bool AttachToDebugOutput()

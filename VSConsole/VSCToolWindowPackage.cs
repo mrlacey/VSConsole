@@ -97,4 +97,16 @@ namespace VSConsole
             return base.GetToolWindowTitle(toolWindowType, id);
         }
     }
+
+    public static class Messenger
+    {
+        public delegate void UpdateFormattingEventHandler();
+
+        public static event UpdateFormattingEventHandler UpdateFormatting;
+
+        public static void RequestUpdateFormatting()
+        {
+            UpdateFormatting?.Invoke();
+        }
+    }
 }
