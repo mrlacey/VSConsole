@@ -10,18 +10,16 @@
              d:DesignHeight="300" d:DesignWidth="300"
              Name="MyToolWindow">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-            <Button Click="OnClearClicked" Foreground="Red">&#x2715;</Button>
-        </StackPanel>
         <TextBlock
-            Grid.Row="1"
             x:Name="OutputWindow"
             ScrollViewer.HorizontalScrollBarVisibility="Auto"
             ScrollViewer.VerticalScrollBarVisibility="Auto"
-            />
+            >
+            <TextBlock.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Clear" Click="OnClearClicked" />
+                </ContextMenu>
+            </TextBlock.ContextMenu>
+        </TextBlock>
     </Grid>
 </UserControl>
