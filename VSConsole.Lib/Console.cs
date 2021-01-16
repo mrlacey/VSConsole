@@ -11,10 +11,90 @@ namespace VSConsole
             Debug.WriteLine($"{nameof(VSConsole)}-Clear::");
         }
 
+        public static void Write(ulong value)
+        {
+            Write(value.ToString());
+        }
+
+        public static void Write(bool value)
+        {
+            Write(value.ToString());
+        }
+
+        public static void Write(char value)
+        {
+            Write(value.ToString());
+        }
+
+        public static void Write(char[] buffer)
+        {
+            Write(new string(buffer));
+        }
+
+        public static void Write(char[] buffer, int index, int count)
+        {
+            Write(new string(buffer.Skip(index).Take(count).ToArray()));
+        }
+
+        public static void Write(double value)
+        {
+            Write(value.ToString());
+        }
+
+        public static void Write(long value)
+        {
+            Write(value.ToString());
+        }
+
+        public static void Write(object value)
+        {
+            Write(value.ToString());
+        }
+
+        public static void Write(float value)
+        {
+            Write(value.ToString());
+        }
+
         public static void Write(string value)
         {
             System.Console.Write(value);
             Debug.WriteLine($"{nameof(VSConsole)}-Write::{value}");
+        }
+
+        public static void Write(string format, object arg0)
+        {
+            Write(string.Format(format, arg0));
+        }
+
+        public static void Write(string format, object arg0, object arg1)
+        {
+            Write(string.Format(format, arg0, arg1));
+        }
+
+        public static void Write(string format, object arg0, object arg1, object arg2)
+        {
+            Write(string.Format(format, arg0, arg1, arg2));
+        }
+
+        public static void Write(string format, params object[] arg)
+        {
+            Write(string.Format(format, arg));
+        }
+
+        public static void Write(uint value)
+        {
+            Write(value.ToString());
+        }
+
+        public static void Write(decimal value)
+        {
+            Write(value.ToString());
+        }
+
+        public static void Write(int value)
+        {
+            Write(value.ToString());
         }
 
         public static void WriteLine(ulong value)
