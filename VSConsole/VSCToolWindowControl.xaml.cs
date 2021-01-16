@@ -28,6 +28,12 @@ namespace VSConsole
             ThreadHelper.ThrowIfNotOnUIThread();
             this.InitializeComponent();
 
+            var options = VSCToolWindowPackage.Instance?.Options ?? new OptionPageGrid();
+            this.OutputWindow.Foreground = ColorHelper.GetColorBrush(options.ForegroundColor);
+            this.OutputWindow.Background = ColorHelper.GetColorBrush(options.BackgroundColor);
+            this.OutputWindow.FontFamily = new System.Windows.Media.FontFamily(options.FontFamily);
+            this.OutputWindow.FontSize = options.FontSize;
+
             this.WaitForDebugOutputTextBuffer();
         }
 
