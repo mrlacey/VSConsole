@@ -52,6 +52,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ColorHelper.cs" />
+    <Compile Include="ListVSConsoleActionsExtensions.cs" />
     <Compile Include="OptionPageGrid.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -87,19 +88,16 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\VSConsoleIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="Resources\VSCToolWindowCommand.png" />
-    <Content Include="Resources\VSCToolWindowPackage.ico" />
     <VSCTCompile Include="VSCToolWindowPackage.vsct">
       <Generator>VsctGenerator</Generator>
       <ResourceName>Menus.ctmenu</ResourceName>
       <LastGenOutput>VSCToolWindowPackage1.cs</LastGenOutput>
     </VSCTCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="VSPackage.resx">
-      <MergeWithCTO>true</MergeWithCTO>
-      <ManifestResourceName>VSPackage</ManifestResourceName>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />

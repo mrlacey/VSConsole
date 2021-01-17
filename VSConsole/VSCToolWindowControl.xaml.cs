@@ -9,6 +9,7 @@ using Microsoft.VisualStudio.TextManager.Interop;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text;
 using System.Linq;
+using System.Windows.Media;
 
 namespace VSConsole
 {
@@ -16,27 +17,40 @@ namespace VSConsole
     {
         private ITextBuffer debugTextBuffer;
         private ITrackingPoint lastTextPoint;
+        private SolidColorBrush backgroundOverride;
+        private SolidColorBrush foregroundOverride;
+        private TextBlock currentTextBlock;
 
         public VSCToolWindowControl()
         {
             ThreadHelper.ThrowIfNotOnUIThread();
             this.InitializeComponent();
 
-            Messenger.UpdateFormatting += () => { this.SetColorsBasedOnSettings(); };
-            this.SetColorsBasedOnSettings();
+            Messenger.UpdateFormatting += () =>
+            {
+                ThreadHelper.ThrowIfNotOnUIThread();
+
+                var options = VSCToolWindowPackage.Instance?.Options ?? new OptionPageGrid();
+                this.BackgroundGrid.Background = ColorHelper.GetColorBrush(options.BackgroundColor);
+
+                var fontFamily = new FontFamily(options.FontFamily);
+                var defaultForeground = ColorHelper.GetColorBrush(options.ForegroundColor);
+
+                foreach (var item in this.OutputWindow.Children)
+                {
+                    if (item is TextBlock tb)
+                    {
+                        tb.Foreground = defaultForeground;
+                        tb.FontFamily = fontFamily;
+                        tb.FontSize = options.FontSize;
+                    }
+                }
+            };
+
+            var opt = VSCToolWindowPackage.Instance?.Options ?? new OptionPageGrid();
+            this.BackgroundGrid.Background = ColorHelper.GetColorBrush(opt.BackgroundColor);
 
             this.WaitForDebugOutputTextBuffer();
-        }
-
-        private void SetColorsBasedOnSettings()
-        {
-            ThreadHelper.ThrowIfNotOnUIThread();
-
-            var options = VSCToolWindowPackage.Instance?.Options ?? new OptionPageGrid();
-            this.OutputWindow.Foreground = ColorHelper.GetColorBrush(options.ForegroundColor);
-            this.OutputWindow.Background = ColorHelper.GetColorBrush(options.BackgroundColor);
-            this.OutputWindow.FontFamily = new System.Windows.Media.FontFamily(options.FontFamily);
-            this.OutputWindow.FontSize = options.FontSize;
         }
 
         private bool AttachToDebugOutput()
@@ -90,9 +104,6 @@ namespace VSConsole
 
         private void ProcessOutput(ITextSnapshot snapshot, ITrackingPoint startPoint, ITrackingPoint endPoint)
         {
-           // ThreadHelper.ThrowIfNotOnUIThread();
-
-
             int textStart = startPoint.GetPosition(snapshot);
             int textLength = endPoint.GetPoint(snapshot) - startPoint.GetPoint(snapshot);
             string text = snapshot.GetText(textStart, textLength);
@@ -105,6 +116,9 @@ namespace VSConsole
             const string WriteLineStart = "VSConsole-WriteLine::";
             const string WriteStart = "VSConsole-Write::";
             const string ClearStart = "VSConsole-Clear::";
+            const string ForegroundColorStart = "VSConsole-ForegroundColor::";
+            const string BackgroundColorStart = "VSConsole-BackgroundColor::";
+            const string ResetColorStart = "VSConsole-ResetColor::";
 
             foreach (var line in lines)
             {
@@ -122,6 +136,18 @@ namespace VSConsole
                     {
                         actions.Add(VSConsoleActionType.Clear);
                     }
+                    else if (line.StartsWith(ForegroundColorStart))
+                    {
+                        actions.Add(VSConsoleActionType.SetForeground, line.Substring(ForegroundColorStart.Length));
+                    }
+                    else if (line.StartsWith(BackgroundColorStart))
+                    {
+                        actions.Add(VSConsoleActionType.SetBackground, line.Substring(BackgroundColorStart.Length));
+                    }
+                    else if (line.StartsWith(ResetColorStart))
+                    {
+                        actions.Add(VSConsoleActionType.ResetColor);
+                    }
                 }
             }
 
@@ -131,31 +157,71 @@ namespace VSConsole
                 {
                     await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
+                    void EnsureCurrentTextBlock(bool skipColorCheck = false)
+                    {
+                        var options = VSCToolWindowPackage.Instance?.Options ?? new OptionPageGrid();
+                        if (currentTextBlock == null)
+                        {
+                            currentTextBlock = new TextBlock
+                            {
+                                TextWrapping = TextWrapping.NoWrap,
+                            };
+                            this.OutputWindow.Children.Add(currentTextBlock);
+
+                            currentTextBlock.Foreground = ColorHelper.GetColorBrush(options.ForegroundColor);
+                            currentTextBlock.FontFamily = new FontFamily(options.FontFamily);
+                            currentTextBlock.FontSize = options.FontSize;
+                        }
+
+                        if (backgroundOverride != null && !skipColorCheck)
+                        {
+                            currentTextBlock.Background = backgroundOverride;
+                        }
+                        else
+                        {
+                            currentTextBlock.Background = null;
+                        }
+
+                        if (foregroundOverride != null && !skipColorCheck)
+                        {
+                            currentTextBlock.Foreground = foregroundOverride;
+                        }
+                        else
+                        {
+                            currentTextBlock.Foreground = ColorHelper.GetColorBrush(options.ForegroundColor);
+                        }
+                    }
+
                     foreach (var vsaction in actions)
                     {
                         switch (vsaction.ActionType)
                         {
                             case VSConsoleActionType.WriteLine:
-                                this.OutputWindow.Text += $"{vsaction.Value}{Environment.NewLine}";
+                                EnsureCurrentTextBlock(string.IsNullOrEmpty(vsaction.Value));
+                                currentTextBlock.Text += $"{vsaction.Value}";
+                                currentTextBlock = null;
                                 break;
                             case VSConsoleActionType.Write:
-                                this.OutputWindow.Text += $"{vsaction.Value}";
+                                EnsureCurrentTextBlock();
+                                currentTextBlock.Text += $"{vsaction.Value}";
                                 break;
                             case VSConsoleActionType.Clear:
-                                this.OutputWindow.Text = string.Empty;
+                                this.OutputWindow.Children.Clear();
                                 break;
                             case VSConsoleActionType.SetForeground:
+                                foregroundOverride = ColorHelper.GetColorBrush(vsaction.Value);
                                 break;
                             case VSConsoleActionType.SetBackground:
+                                backgroundOverride = ColorHelper.GetColorBrush(vsaction.Value);
                                 break;
                             case VSConsoleActionType.ResetColor:
+                                backgroundOverride = null;
+                                foregroundOverride = null;
                                 break;
                             default:
                                 break;
                         }
-
                     }
-
                 }).FileAndForget(nameof(VSCToolWindow) + nameof(this.ProcessOutput));
             }
         }
@@ -183,14 +249,6 @@ namespace VSConsole
             => input.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None).Where(a => !string.IsNullOrEmpty(a));
 
         private void OnClearClicked(object sender, RoutedEventArgs e)
-            => this.OutputWindow.Text = string.Empty;
-    }
-
-    public static class ListVSConsoleActionsExtensions
-    {
-        public static void Add(this List<VSConsoleAction> list, VSConsoleActionType actionType, string value = "")
-        {
-            list.Add(new VSConsoleAction { ActionType = actionType, Value = value });
-        }
+            => this.OutputWindow.Children.Clear();
     }
 }

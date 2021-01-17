@@ -5,6 +5,7 @@
         <DisplayName>VSConsole</DisplayName>
         <Description xml:space="preserve">See selected Console output in a Visual Studio window.</Description>
         <MoreInfo>https://github.com/mrlacey/VSConsole</MoreInfo>
+        <Icon>Resources\VSConsoleIcon.png</Icon>
         <Tags>Console</Tags>
     </Metadata>
     <Installation>

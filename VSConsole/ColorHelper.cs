@@ -11,12 +11,19 @@ namespace VSConsole
                 color = GetHexForNamedColor(color.Trim());
             }
 
-            return new SolidColorBrush((Color)ColorConverter.ConvertFromString(color.Trim()));
+            try
+            {
+                return new SolidColorBrush((Color)ColorConverter.ConvertFromString(color.Trim()));
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public static string GetHexForNamedColor(string colorName)
         {
-            switch (colorName?.ToLowerInvariant() ?? string.Empty)
+            switch (colorName?.ToLowerInvariant().Replace(" ", string.Empty) ?? string.Empty)
             {
                 case "aliceblue": return "#F0F8FF";
                 case "antiquewhite": return "#FAEBD7";

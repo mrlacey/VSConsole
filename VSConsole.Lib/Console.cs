@@ -1,14 +1,170 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 
 namespace VSConsole
 {
     public static class Console
     {
+        public static ConsoleColor ForegroundColor
+        {
+            get
+            {
+                return System.Console.ForegroundColor;
+            }
+
+            set
+            {
+                Debug.WriteLine($"{nameof(VSConsole)}-ForegroundColor::{value}");
+                System.Console.ForegroundColor = value;
+            }
+        }
+
+        public static ConsoleColor BackgroundColor
+        {
+            get
+            {
+                return System.Console.BackgroundColor;
+            }
+
+            set
+            {
+                Debug.WriteLine($"{nameof(VSConsole)}-BackgroundColor::{value}");
+                System.Console.BackgroundColor = value;
+            }
+        }
+
+        public static void Beep()
+        {
+            // VSConsole does nothing here
+            System.Console.Beep();
+        }
+
+        public static void Beep(int frequency, int duration)
+        {
+            // VSConsole does nothing here
+            System.Console.Beep(frequency, duration);
+        }
+
         public static void Clear()
         {
             System.Console.Clear();
             Debug.WriteLine($"{nameof(VSConsole)}-Clear::");
+        }
+
+        public static void MoveBufferArea(int sourceLeft, int sourceTop, int sourceWidth, int sourceHeight, int targetLeft, int targetTop)
+        {
+            // VSConsole does nothing here
+            System.Console.MoveBufferArea(sourceLeft, sourceTop, sourceWidth, sourceHeight, targetLeft, targetTop);
+        }
+
+        public static Stream OpenStandardError(int bufferSize)
+        {
+            // VSConsole does nothing here
+            return System.Console.OpenStandardError(bufferSize);
+        }
+
+        public static Stream OpenStandardError()
+        {
+            // VSConsole does nothing here
+            return System.Console.OpenStandardError();
+        }
+
+        public static Stream OpenStandardInput(int bufferSize)
+        {
+            // VSConsole does nothing here
+            return System.Console.OpenStandardInput(bufferSize);
+        }
+
+        public static Stream OpenStandardInput()
+        {
+            // VSConsole does nothing here
+            return System.Console.OpenStandardInput();
+        }
+
+        public static Stream OpenStandardOutput(int bufferSize)
+        {
+            // VSConsole does nothing here
+            return System.Console.OpenStandardOutput(bufferSize);
+        }
+
+        public static Stream OpenStandardOutput()
+        {
+            // VSConsole does nothing here
+            return System.Console.OpenStandardOutput();
+        }
+
+        public static int Read()
+        {
+            // VSConsole does nothing here
+            return System.Console.Read();
+        }
+
+        public static ConsoleKeyInfo ReadKey(bool intercept)
+        {
+            // VSConsole does nothing here
+            return System.Console.ReadKey(intercept);
+        }
+
+        public static ConsoleKeyInfo ReadKey()
+        {
+            // VSConsole does nothing here
+            return System.Console.ReadKey();
+        }
+
+        public static string ReadLine()
+        {
+            // VSConsole does nothing here
+            return System.Console.ReadLine();
+        }
+
+        public static void ResetColor()
+        {
+            Debug.WriteLine($"{nameof(VSConsole)}-ResetColor::");
+            System.Console.ResetColor();
+        }
+
+        public static void SetBufferSize(int width, int height)
+        {
+            // VSConsole does nothing here
+            System.Console.SetBufferSize(width, height);
+        }
+
+        public static void SetCursorPosition(int left, int top)
+        {
+            // VSConsole does nothing here
+            System.Console.SetCursorPosition(left, top);
+        }
+
+        public static void SetError(TextWriter newError)
+        {
+            // VSConsole does nothing here
+            System.Console.SetError(newError);
+        }
+
+        public static void SetIn(TextReader newIn)
+        {
+            // VSConsole does nothing here
+            System.Console.SetIn(newIn);
+        }
+
+        public static void SetOut(TextWriter newOut)
+        {
+            // VSConsole does nothing here
+            System.Console.SetOut(newOut);
+        }
+
+        public static void SetWindowPosition(int left, int top)
+        {
+            // VSConsole does nothing here
+            System.Console.SetWindowPosition(left, top);
+        }
+
+        public static void SetWindowSize(int width, int height)
+        {
+            // VSConsole does nothing here
+            System.Console.SetWindowSize(width, height);
         }
 
         public static void Write(ulong value)

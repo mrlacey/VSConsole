@@ -33,7 +33,7 @@ namespace VSConsole
     /// </para>
     /// </remarks>
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
-    [InstalledProductRegistration("VSConsole", "See selected Console output in a Visual Studio window.", "1.0", IconResourceID = 400)] // Info on this package for Help/About
+    [InstalledProductRegistration("VSConsole", "See selected Console output in a Visual Studio window.", "1.0")]
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [ProvideToolWindow(typeof(VSCToolWindow))]
     [Guid(PackageGuids.guidVSCToolWindowPackageString)]
