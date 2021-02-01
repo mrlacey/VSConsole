@@ -16,7 +16,7 @@ namespace VSConsole
 
             set
             {
-                Debug.WriteLine($"{nameof(VSConsole)}-ForegroundColor::{value}");
+                Debug.WriteLine($"{nameof(VSConsole)}-{nameof(ForegroundColor)}::{value}");
                 System.Console.ForegroundColor = value;
             }
         }
@@ -30,7 +30,7 @@ namespace VSConsole
 
             set
             {
-                Debug.WriteLine($"{nameof(VSConsole)}-BackgroundColor::{value}");
+                Debug.WriteLine($"{nameof(VSConsole)}-{nameof(BackgroundColor)}::{value}");
                 System.Console.BackgroundColor = value;
             }
         }
@@ -50,7 +50,7 @@ namespace VSConsole
         public static void Clear()
         {
             System.Console.Clear();
-            Debug.WriteLine($"{nameof(VSConsole)}-Clear::");
+            Debug.WriteLine($"{nameof(VSConsole)}-{nameof(Clear)}::");
         }
 
         public static void MoveBufferArea(int sourceLeft, int sourceTop, int sourceWidth, int sourceHeight, int targetLeft, int targetTop)
