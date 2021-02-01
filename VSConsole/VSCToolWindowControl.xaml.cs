@@ -10,6 +10,7 @@ using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text;
 using System.Linq;
 using System.Windows.Media;
+using System.Windows.Documents;
 
 namespace VSConsole
 {
@@ -19,7 +20,7 @@ namespace VSConsole
         private ITrackingPoint lastTextPoint;
         private SolidColorBrush backgroundOverride;
         private SolidColorBrush foregroundOverride;
-        private TextBlock currentTextBlock;
+        private const string OverrideTag = "OVERRIDE";
 
         public VSCToolWindowControl()
         {
@@ -36,19 +37,25 @@ namespace VSConsole
                 var fontFamily = new FontFamily(options.FontFamily);
                 var defaultForeground = ColorHelper.GetColorBrush(options.ForegroundColor);
 
-                foreach (var item in this.OutputWindow.Children)
+                foreach (var item in this.OutputParagraph.Inlines)
                 {
-                    if (item is TextBlock tb)
+                    if (item is Run run)
                     {
-                        tb.Foreground = defaultForeground;
-                        tb.FontFamily = fontFamily;
-                        tb.FontSize = options.FontSize;
+                        if (run.Tag?.ToString() != OverrideTag)
+                        {
+                            run.Foreground = defaultForeground;
+                        }
+                        run.FontFamily = fontFamily;
+                        run.FontSize = options.FontSize;
                     }
                 }
             };
 
             var opt = VSCToolWindowPackage.Instance?.Options ?? new OptionPageGrid();
             this.BackgroundGrid.Background = ColorHelper.GetColorBrush(opt.BackgroundColor);
+            OutputParagraph.Foreground = ColorHelper.GetColorBrush(opt.ForegroundColor);
+            OutputParagraph.FontFamily = new FontFamily(opt.FontFamily);
+            OutputParagraph.FontSize = opt.FontSize;
 
             this.WaitForDebugOutputTextBuffer();
         }
@@ -157,39 +164,23 @@ namespace VSConsole
                 {
                     await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-                    void EnsureCurrentTextBlock(bool skipColorCheck = false)
+                    Run CreateRun(string content)
                     {
-                        var options = VSCToolWindowPackage.Instance?.Options ?? new OptionPageGrid();
-                        if (currentTextBlock == null)
-                        {
-                            currentTextBlock = new TextBlock
-                            {
-                                TextWrapping = TextWrapping.NoWrap,
-                            };
-                            this.OutputWindow.Children.Add(currentTextBlock);
+                        var result = new Run(content);
 
-                            currentTextBlock.Foreground = ColorHelper.GetColorBrush(options.ForegroundColor);
-                            currentTextBlock.FontFamily = new FontFamily(options.FontFamily);
-                            currentTextBlock.FontSize = options.FontSize;
+                        if (backgroundOverride != null)
+                        {
+                            result.Background = backgroundOverride;
+                            result.Tag = OverrideTag;
                         }
 
-                        if (backgroundOverride != null && !skipColorCheck)
+                        if (foregroundOverride != null)
                         {
-                            currentTextBlock.Background = backgroundOverride;
-                        }
-                        else
-                        {
-                            currentTextBlock.Background = null;
+                            result.Foreground = foregroundOverride;
+                            result.Tag = OverrideTag;
                         }
 
-                        if (foregroundOverride != null && !skipColorCheck)
-                        {
-                            currentTextBlock.Foreground = foregroundOverride;
-                        }
-                        else
-                        {
-                            currentTextBlock.Foreground = ColorHelper.GetColorBrush(options.ForegroundColor);
-                        }
+                        return result;
                     }
 
                     foreach (var vsaction in actions)
@@ -197,16 +188,14 @@ namespace VSConsole
                         switch (vsaction.ActionType)
                         {
                             case VSConsoleActionType.WriteLine:
-                                EnsureCurrentTextBlock(string.IsNullOrEmpty(vsaction.Value));
-                                currentTextBlock.Text += $"{vsaction.Value}";
-                                currentTextBlock = null;
+                                OutputParagraph.Inlines.Add(CreateRun(vsaction.Value));
+                                OutputParagraph.Inlines.Add(new LineBreak());
                                 break;
                             case VSConsoleActionType.Write:
-                                EnsureCurrentTextBlock();
-                                currentTextBlock.Text += $"{vsaction.Value}";
+                                OutputParagraph.Inlines.Add(CreateRun(vsaction.Value));
                                 break;
                             case VSConsoleActionType.Clear:
-                                this.OutputWindow.Children.Clear();
+                                OutputParagraph.Inlines.Clear();
                                 break;
                             case VSConsoleActionType.SetForeground:
                                 foregroundOverride = ColorHelper.GetColorBrush(vsaction.Value);
@@ -233,10 +222,10 @@ namespace VSConsole
             if (!this.AttachToDebugOutput())
             {
                 //CancellationToken cancelToken = this.cancellationTokenSource.Token;
-
+                
                 ThreadHelper.JoinableTaskFactory.RunAsync(async delegate
                 {
-                    //while (!this.AttachToDebugOutput() && this.viewModel.IsDebugging && !cancelToken.IsCancellationRequested)
+                    //while (!this.AttachToDebugOutput() && !cancelToken.IsCancellationRequested)
                     while (!this.AttachToDebugOutput())
                     {
                         await System.Threading.Tasks.Task.Delay(TimeSpan.FromSeconds(1.0));
@@ -249,6 +238,6 @@ namespace VSConsole
             => input.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None).Where(a => !string.IsNullOrEmpty(a));
 
         private void OnClearClicked(object sender, RoutedEventArgs e)
-            => this.OutputWindow.Children.Clear();
+            => this.OutputParagraph.Inlines.Clear();
     }
 }
