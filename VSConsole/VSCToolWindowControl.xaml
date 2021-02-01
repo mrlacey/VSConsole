@@ -19,6 +19,7 @@
             Background="Transparent"
             BorderThickness="0"
             VerticalScrollBarVisibility="Auto"
+            x:Name="RTB"
             Margin="2,0,0,0">
             <RichTextBox.ContextMenu>
                 <ContextMenu>

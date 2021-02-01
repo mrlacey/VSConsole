@@ -1,16 +1,16 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using Microsoft.VisualStudio.Shell.Interop;
-using Microsoft.VisualStudio.Shell;
+﻿using System;
 using System.Collections.Generic;
-using Microsoft.VisualStudio;
-using System;
-using Microsoft.VisualStudio.TextManager.Interop;
-using Microsoft.VisualStudio.Text.Editor;
-using Microsoft.VisualStudio.Text;
 using System.Linq;
-using System.Windows.Media;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Media;
+using Microsoft.VisualStudio;
+using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
+using Microsoft.VisualStudio.Text;
+using Microsoft.VisualStudio.Text.Editor;
+using Microsoft.VisualStudio.TextManager.Interop;
 
 namespace VSConsole
 {
@@ -190,12 +190,15 @@ namespace VSConsole
                             case VSConsoleActionType.WriteLine:
                                 OutputParagraph.Inlines.Add(CreateRun(vsaction.Value));
                                 OutputParagraph.Inlines.Add(new LineBreak());
+                                RTB.ScrollToEnd();
                                 break;
                             case VSConsoleActionType.Write:
                                 OutputParagraph.Inlines.Add(CreateRun(vsaction.Value));
+                                RTB.ScrollToEnd();
                                 break;
                             case VSConsoleActionType.Clear:
                                 OutputParagraph.Inlines.Clear();
+                                RTB.ScrollToHome();
                                 break;
                             case VSConsoleActionType.SetForeground:
                                 foregroundOverride = ColorHelper.GetColorBrush(vsaction.Value);
@@ -222,7 +225,7 @@ namespace VSConsole
             if (!this.AttachToDebugOutput())
             {
                 //CancellationToken cancelToken = this.cancellationTokenSource.Token;
-                
+
                 ThreadHelper.JoinableTaskFactory.RunAsync(async delegate
                 {
                     //while (!this.AttachToDebugOutput() && !cancelToken.IsCancellationRequested)
@@ -238,6 +241,9 @@ namespace VSConsole
             => input.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None).Where(a => !string.IsNullOrEmpty(a));
 
         private void OnClearClicked(object sender, RoutedEventArgs e)
-            => this.OutputParagraph.Inlines.Clear();
+        {
+            this.OutputParagraph.Inlines.Clear();
+            RTB.ScrollToHome();
+        }
     }
 }
