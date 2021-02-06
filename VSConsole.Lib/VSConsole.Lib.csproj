@@ -1,20 +1,38 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageId>VSConsole</PackageId>
-    <Version>0.1-pre</Version>
-    <Authors>Matt Lacey</Authors>
-    <Company>Matt Lacey  Ltd.</Company>
-    <Product>VSConsole</Product>
-    <Copyright>Matt Lacey Ltd. 2021</Copyright>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/mrlacey/VSConsole</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/mrlacey/VSConsole</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageTags>VSSDK,VisualStudio,Console</PackageTags>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Description>Utility library for use with the VSConsole Extension for Visual Studio 2019</Description>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <PackageId>VSConsole</PackageId>
+        <Version>0.1.0-pre</Version>
+        <Authors>Matt Lacey</Authors>
+        <Company>Matt Lacey Ltd.</Company>
+        <Product>VSConsole</Product>
+        <Copyright>Matt Lacey Ltd. 2021</Copyright>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/mrlacey/VSConsole</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/mrlacey/VSConsole</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>VSSDK;VisualStudio;Console</PackageTags>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Description>Utility library for use with the VSConsole Extension for Visual Studio 2019</Description>
+
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="NuGet.CommandLine" Version="5.8.1" GeneratePackagePath="true">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
+    </ItemGroup>
+
+    <Import Project="signnupkg.targets" />
 
 </Project>
