@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <PackageId>VSConsole</PackageId>
-        <Version>0.1.1-pre</Version>
+        <Version>0.1.2-pre</Version>
         <Authors>Matt Lacey</Authors>
         <Company>Matt Lacey Ltd.</Company>
         <Product>VSConsole</Product>
@@ -21,6 +21,10 @@
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+      <DefineConstants>DEBUG;TRACE</DefineConstants>
     </PropertyGroup>
 
     <ItemGroup>
