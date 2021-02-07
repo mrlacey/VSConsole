@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <PackageId>VSConsole</PackageId>
-        <Version>0.1.2-pre</Version>
+        <Version>1.0.0</Version>
         <Authors>Matt Lacey</Authors>
         <Company>Matt Lacey Ltd.</Company>
         <Product>VSConsole</Product>
