@@ -12,7 +12,8 @@ Download the extension from the [VS Marketplace](https://marketplace.visualstudi
 
 ![Screenshot showing example output in the VSConsole window inside Visual Studio](./Assets/example-screenshot.png)
 
-It relies on the use of a [NuGet package](https://www.nuget.org/packages/VSConsole/) that contains a class `Console` that has a matching API signature as `System.Console`. Use it in the same way but when debugging, what is displayed in the running command window will also show in the VSConsole window inside Visual Studio.
+It relies on the use of a [NuGet package](https://www.nuget.org/packages/VSConsole/) that contains a class `Console` that has a matching API signature as `System.Console`.
+Use it in the same way but when debugging, what is displayed in the running command window will also show in the VSConsole window inside Visual Studio.
 
 
 Customize the display as you want it: colors; font; size.
