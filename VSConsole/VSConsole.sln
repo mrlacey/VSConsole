@@ -5,7 +5,12 @@ VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSConsole", "VSConsole.csproj", "{B2E1286F-C3B5-48AC-A0C2-9F90D3E8CA75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSConsole.Lib", "..\VSConsole.Lib\VSConsole.Lib.csproj", "{B763EC8E-6B6C-4E74-972C-16B47EE515AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VSConsole.Lib", "..\VSConsole.Lib\VSConsole.Lib.csproj", "{B763EC8E-6B6C-4E74-972C-16B47EE515AE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{898CA9DC-23B6-4768-A0AB-792A85594D05}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
