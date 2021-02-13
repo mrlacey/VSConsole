@@ -245,5 +245,10 @@ namespace VSConsole
             this.OutputParagraph.Inlines.Clear();
             RTB.ScrollToHome();
         }
+
+        private void OnOptionsClicked(object sender, RoutedEventArgs e)
+        {
+            VSCToolWindowPackage.Instance?.ShowOptionPage(typeof(OptionPageGrid));
+        }
     }
 }

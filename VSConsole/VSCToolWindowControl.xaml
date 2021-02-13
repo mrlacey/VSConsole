@@ -23,9 +23,15 @@
             Margin="2,0,0,0">
             <RichTextBox.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Clear"  Click="OnClearClicked">
+                    <MenuItem Header="Clear" Click="OnClearClicked">
                         <MenuItem.Icon>
                             <imaging:CrispImage Width="16" Height="16" Moniker="{x:Static catalog:KnownMonikers.ClearWindowContent}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Header="Options" Click="OnOptionsClicked">
+                        <MenuItem.Icon>
+                            <imaging:CrispImage Width="16" Height="16" Moniker="{x:Static catalog:KnownMonikers.Settings}" />
                         </MenuItem.Icon>
                     </MenuItem>
                 </ContextMenu>
