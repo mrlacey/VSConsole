@@ -49,6 +49,11 @@ namespace VSConsole
                         run.FontSize = options.FontSize;
                     }
                 }
+
+                // Change defaults ready for any future input
+                OutputParagraph.Foreground = defaultForeground;
+                OutputParagraph.FontFamily = fontFamily;
+                OutputParagraph.FontSize = options.FontSize;
             };
 
             var opt = VSCToolWindowPackage.Instance?.Options ?? new OptionPageGrid();
