@@ -2,11 +2,12 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 ![Works with Visual Studio 2019](https://img.shields.io/static/v1.svg?label=VS&message=2019&color=5F2E96)
+![Works with Visual Studio 2022](https://img.shields.io/static/v1.svg?label=VS&message=2022&color=5F2E96)
 ![Nuget](https://img.shields.io/nuget/dt/vsconsole)
 
 Improve your debugging and presentation experience by seeing the Console output inside Visual Studio.
 
-Download the extension from the [VS Marketplace](https://marketplace.visualstudio.com/items?itemName=MattLaceyLtd.VSConsole) AND install the [NuGet package](https://www.nuget.org/packages/VSConsole/).
+Download the extension from the VS Marketplace [for VS2022](https://marketplace.visualstudio.com/items?itemName=MattLaceyLtd.VSConsole) or [VS2019](https://marketplace.visualstudio.com/items?itemName=MattLaceyLtd.VSConsole2019) AND install the [NuGet package](https://www.nuget.org/packages/VSConsole/).
 
 -------------------------------------
 
