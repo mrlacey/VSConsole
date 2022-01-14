@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="VSConsole.5e9c6d51-cff5-4583-badd-b5033a9d6482" Version="1.0" Language="en-US" Publisher="Matt Lacey" />
-        <DisplayName>VSConsole</DisplayName>
+        <Identity Id="VSConsole2019.5e9c6d51-cff5-4583-badd-b5033a9d6482" Version="1.0" Language="en-US" Publisher="Matt Lacey" />
+        <DisplayName>VSConsole (2019)</DisplayName>
         <Description xml:space="preserve">See selected Console output in a Visual Studio window.</Description>
         <MoreInfo>https://github.com/mrlacey/VSConsole</MoreInfo>
         <Icon>Resources\VSConsoleIcon.png</Icon>
