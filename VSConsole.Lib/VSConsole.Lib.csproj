@@ -16,7 +16,7 @@
         <PackageTags>VSSDK;VisualStudio;Console</PackageTags>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Description>Utility library for use with the VSConsole Extension for Visual Studio</Description>
-
+        <PackageReadmeFile>nugetreadme.md</PackageReadmeFile>
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
@@ -29,6 +29,7 @@
 
     <ItemGroup>
       <None Include="VSConsoleIcon.png" Pack="true" PackagePath="" />
+      <None Include="nugetreadme.md" Pack="true" PackagePath="\"/>
     </ItemGroup>
 
     <ItemGroup>
