@@ -2,11 +2,11 @@
 
 This library is designed to be used exclusivley with the accompanying Visual Studio Extension. Avaialble for [VS2022](https://marketplace.visualstudio.com/items?itemName=MattLaceyLtd.VSConsole) and [VS2019](https://marketplace.visualstudio.com/items?itemName=MattLaceyLtd.VSConsole2019).
 
-![Screenshot showing example output in the VSConsole window inside Visual Studio](https://github.com/mrlacey/VSConsole/raw/main/Assets/example-screenshot.png)
+![Screenshot showing example output in the VSConsole window inside Visual Studio](https://raw.githubusercontent.com/mrlacey/VSConsole/main/Assets/example-screenshot.png)
 
 Customize the display as you want it: colors; font; size.
 
-![Options window](https://github.com/mrlacey/VSConsole/raw/main/Assets/vsconsole-options.png)
+![Options window](https://raw.githubusercontent.com/mrlacey/VSConsole/main/Assets/vsconsole-options.png)
 
 You can access the settings via Tools > Options > VSConsole, or right click on the window and select `Options`.
 
