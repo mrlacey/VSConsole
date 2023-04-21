@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="VSConsole.5e9c6d51-cff5-4583-badd-b5033a9d6482" Version="1.1.1" Language="en-US" Publisher="Matt Lacey" />
+        <Identity Id="VSConsole.5e9c6d51-cff5-4583-badd-b5033a9d6482" Version="1.2" Language="en-US" Publisher="Matt Lacey" />
         <DisplayName>VSConsole</DisplayName>
         <Description xml:space="preserve">See selected Console output in a Visual Studio window.</Description>
         <MoreInfo>https://github.com/mrlacey/VSConsole</MoreInfo>
@@ -9,10 +9,10 @@
         <Tags>Console</Tags>
     </Metadata>
     <Installation>
-        <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[17.0, 18.0)">
+        <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[17.2, 18.0)">
             <ProductArchitecture>amd64</ProductArchitecture>
         </InstallationTarget>
-        <InstallationTarget Version="[17.0,18.0)" Id="Microsoft.VisualStudio.Community">
+        <InstallationTarget Version="[17.2,18.0)" Id="Microsoft.VisualStudio.Community">
             <ProductArchitecture>arm64</ProductArchitecture>
         </InstallationTarget>
     </Installation>
