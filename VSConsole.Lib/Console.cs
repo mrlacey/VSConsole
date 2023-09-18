@@ -35,6 +35,73 @@ namespace VSConsole
             }
         }
 
+        public static bool IsErrorRedirected
+        {
+            get
+            {
+                return System.Console.IsErrorRedirected;
+            }
+
+            set
+            {
+                // Do nothing for VSConsole;
+            }
+        }
+
+        public static bool IsInputRedirected
+        {
+            get
+            {
+                return System.Console.IsInputRedirected;
+            }
+
+            set
+            {
+                // Do nothing for VSConsole;
+            }
+        }
+
+        public static bool IsOutputRedirected
+        {
+            get
+            {
+                return System.Console.IsOutputRedirected;
+            }
+
+            set
+            {
+                // Do nothing for VSConsole;
+            }
+        }
+
+        public static System.Text.Encoding InputEncoding
+        {
+            get
+            {
+                return System.Console.InputEncoding;
+            }
+
+            set
+            {
+                // VSConsole does not directly support InputEncoding
+                System.Console.InputEncoding = value;
+            }
+        }
+
+        public static System.Text.Encoding OutputEncoding
+        {
+            get
+            {
+                return System.Console.OutputEncoding;
+            }
+
+            set
+            {
+                // VSConsole does not directly support OutputEncoding
+                System.Console.OutputEncoding = value;
+            }
+        }
+
         public static void Beep()
         {
             // VSConsole does nothing here
