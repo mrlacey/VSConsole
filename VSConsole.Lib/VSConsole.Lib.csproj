@@ -10,6 +10,7 @@
         <Copyright>Matt Lacey Ltd. © 2023</Copyright>
         <PackageIcon>VSConsoleIcon.png</PackageIcon>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <PackageProjectUrl>https://github.com/mrlacey/VSConsole</PackageProjectUrl>
         <RepositoryUrl>https://github.com/mrlacey/VSConsole</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
@@ -28,12 +29,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <None Include="VSConsoleIcon.png" Pack="true" PackagePath="" />
-      <None Include="nugetreadme.md" Pack="true" PackagePath="\"/>
+      <None Include="VSConsoleIcon.png" Pack="true" PackagePath="\" />
+      <None Include="nugetreadme.md" Pack="true" PackagePath="\" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="NuGet.CommandLine" Version="5.8.1" GeneratePackagePath="true">
+        <PackageReference Include="NuGet.CommandLine" Version="6.8.1" GeneratePackagePath="true">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
