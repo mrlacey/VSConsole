@@ -123,6 +123,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="filestosign.txt" />
     <Content Include="LICENSE.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
