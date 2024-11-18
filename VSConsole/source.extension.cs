@@ -11,7 +11,7 @@ namespace VSConsole
         public const string Name = "VSConsole";
         public const string Description = @"See selected Console output in a Visual Studio window.";
         public const string Language = "en-US";
-        public const string Version = "1.2";
+        public const string Version = "1.2.1";
         public const string Author = "Matt Lacey";
         public const string Tags = "Console";
     }
