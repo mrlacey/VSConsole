@@ -34,14 +34,15 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="NuGet.CommandLine" Version="6.8.1" GeneratePackagePath="true">
+        <PackageReference Include="NuGet.CommandLine" Version="6.12.1" GeneratePackagePath="true">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+        <PackageReference Include="WarnAboutTODOs" Version="1.6.0" />
     </ItemGroup>
 
     <Import Project="signnupkg.targets" />
