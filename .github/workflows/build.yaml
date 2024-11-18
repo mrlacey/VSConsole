@@ -20,8 +20,8 @@ jobs:
     env:
       Configuration: Debug
       DeployExtension: False
-#      VsixManifestPath: src\VSConsole\source.extension.vsixmanifest
-#      VsixManifestSourcePath: src\VSConsole\source.extension.cs
+#      VsixManifestPath: VSConsole\source.extension.vsixmanifest
+#      VsixManifestSourcePath: VSConsole\source.extension.cs
       
     steps:
     - uses: actions/checkout@v4
@@ -41,7 +41,7 @@ jobs:
 #        vsix-token-source-file: ${{ env.VsixManifestSourcePath }}
 
     - name: Build
-      run: msbuild /v:m -restore /p:OutDir=\_built ./src/VSConsole/VSConsole.sln
+      run: msbuild /v:m -restore /p:OutDir=\_built ./VSConsole/VSConsole.sln
 
 #    - name: Upload artifact
 #      uses: actions/upload-artifact@v4
