@@ -4,6 +4,9 @@
 ![Works with Visual Studio 2019](https://img.shields.io/static/v1.svg?label=VS&message=2019&color=5F2E96)
 ![Works with Visual Studio 2022](https://img.shields.io/static/v1.svg?label=VS&message=2022&color=5F2E96)
 ![Nuget](https://img.shields.io/nuget/dt/vsconsole)
+![Install from NuGet](https://img.shields.io/nuget/v/vsconsole)
+
+[![Build](https://github.com/mrlacey/VSConsole/actions/workflows/build.yaml/badge.svg)](https://github.com/mrlacey/VSConsole/actions/workflows/build.yaml)
 
 Improve your debugging and presentation experience by seeing the Console output inside Visual Studio.
 
